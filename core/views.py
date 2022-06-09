@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from .models import Shortener
 from .forms import ShortenerForm
@@ -26,8 +26,9 @@ def home_view(request):
             context['new_url'] = new_url
             context['long_url'] = long_url
 
-            return render(request, template, context)
-
+            # return render(request, template, context)
+            print(new_url)
+            return redirect(to=new_url)
         context['errors'] = used_form.errors
 
         return render(request, template, context)
